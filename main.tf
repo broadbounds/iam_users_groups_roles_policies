@@ -35,25 +35,31 @@ resource "aws_iam_group" "operations" {
 
 # We manage IAM Group membership for IAM Users
 resource "aws_iam_group_membership" "developers_team" {
-  name = "tf-testing-group-membership"
+  # The name to identify the Group Membership
+  name = "developers-team"
 
+  # A list of IAM User names to associate with the Group
   users = [
     aws_iam_user.user_one.name,
     aws_iam_user.user_two.name,
   ]
 
+  # The IAM Group name to attach the list of users to
   group = aws_iam_group.developers.name
 }
 
 # We manage IAM Group membership for IAM Users
 resource "aws_iam_group_membership" "operations_team" {
+  # The name to identify the Group Membership
   name = "tf-testing-group-membership"
 
+  # A list of IAM User names to associate with the Group
   users = [
     aws_iam_user.user_one.name,
     aws_iam_user.user_two.name,
   ]
 
+  # The IAM Group name to attach the list of users to
   group = aws_iam_group.operations.name
 }
 
