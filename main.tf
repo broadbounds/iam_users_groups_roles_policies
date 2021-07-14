@@ -20,3 +20,67 @@ resource "aws_iam_access_key" "employee_keys" {
   count = length(var.username)
   user = element(var.username,count.index)
 }
+
+# We create an IAM group for developers
+resource "aws_iam_group" "developers" {
+  name = "developers"
+  path = "/users/"
+}
+
+# We create an IAM group for operations
+resource "aws_iam_group" "operations" {
+  name = "operations"
+  path = "/users/"
+}
+
+# We manage IAM Group membership for IAM Users
+resource "aws_iam_group_membership" "developers_team" {
+  name = "tf-testing-group-membership"
+
+  users = [
+    aws_iam_user.user_one.name,
+    aws_iam_user.user_two.name,
+  ]
+
+  group = aws_iam_group.developers.name
+}
+
+# We manage IAM Group membership for IAM Users
+resource "aws_iam_group_membership" "operations_team" {
+  name = "tf-testing-group-membership"
+
+  users = [
+    aws_iam_user.user_one.name,
+    aws_iam_user.user_two.name,
+  ]
+
+  group = aws_iam_group.operations.name
+}
+
+# We add some IAM users to the developers IAM Group
+resource "aws_iam_user_group_membership" "developers_membership" {
+  user = aws_iam_user.user1.name
+
+  groups = [
+    aws_iam_group.developers.name,
+  ]
+}
+
+# We add some IAM users to the operations IAM Group
+resource "aws_iam_user_group_membership" "operations_membership" {
+  user = aws_iam_user.user1.name
+
+  groups = [
+    aws_iam_group.operations.name,
+  ]
+}
+
+# We add some IAM users to the developers and operations IAM Groups
+resource "aws_iam_user_group_membership" "developers_operations_membership" {
+  user = aws_iam_user.user1.name
+
+  groups = [
+    aws_iam_group.developers.name,
+    aws_iam_group.operations.name,
+  ]
+}
