@@ -5,10 +5,10 @@ output "user_arn" {
 
 output "user_access_key_id" {
   description = "The access key ID"
-  value = aws_iam_access_key.this.*.id
+  value = aws_iam_access_key.employee_keys.*.id
 }
 
 output "user_access_key_secret" {
   description = "The access key secret"
-  value       = aws_iam_access_key.this_no_pgp.*.secret
+  value       = aws_iam_access_key.employee_keys.*.secret
 }
