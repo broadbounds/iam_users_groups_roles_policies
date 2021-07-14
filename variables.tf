@@ -15,4 +15,4 @@ variable "secret_key" {
 
 variable "username" {
   type = "list"
-  default = ["Joseph","Mary","Moses"]}
+  default = ["Joseph","Mary","Moses", "David"], "Abraham}
