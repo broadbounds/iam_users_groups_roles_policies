@@ -12,3 +12,7 @@ variable "secret_key" {
   type        = string
   default     = ""
 }
+
+variable "username" {
+  type = "list"
+  default = ["Joseph","Mary","Moses"]}
