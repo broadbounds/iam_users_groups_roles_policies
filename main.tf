@@ -16,7 +16,7 @@ resource "aws_iam_user" "employee" {
 # We create access and secret keys for created IAM users
 # Set of credentials that allow API requests to be made as an IAM user
 # This will write the secret to the state file
-resource "aws_iam_access_key" "newemp" {
+resource "aws_iam_access_key" "employee_keys" {
   count = length(var.username)
   user = element(var.username,count.index)
 }
